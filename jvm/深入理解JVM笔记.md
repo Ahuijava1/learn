@@ -108,7 +108,7 @@ HotSpot虚拟机默认的分配顺序为longs/doubles、ints、shorts/chars、by
 
 ### 3.6 低延迟垃圾收集器
 
-衡量垃圾收集器的三项最重要的指标是：**内存占用**（Footprint）、**吞吐量**（Throughput）和延迟 （Latency）
+衡量垃圾收集器的三项最重要的指标是：**内存占用**（Footprint）、**吞吐量**（Throughput）和**延迟** （Latency）
 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20200924225609855.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MTc5NjI1Nw==,size_16,color_FFFFFF,t_70#pic_center)
 
