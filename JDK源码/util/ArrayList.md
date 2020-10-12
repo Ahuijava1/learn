@@ -159,6 +159,8 @@ private void ensureCapacityInternal(int minCapacity) {
 // 计算容量
 private static int calculateCapacity(Object[] elementData, int minCapacity) {
     // 返回新容量与DEFAULT_CAPACITY的最大值（第一次添加就要扩容了，当然是DEFAULT_CAPACITY为最大值。
+    // 这里其实就是当没有传入具体容量的时候，第一次默认扩容为默认容量，也就是0,
+    // 但是还有一种情况就是，如果传入的是一个集合，那么第一次扩容还是得看集合的长度的
     if (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) {
         return Math.max(DEFAULT_CAPACITY, minCapacity);
     }
