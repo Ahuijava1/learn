@@ -15,7 +15,7 @@ public class NIOFileChannel04 {
 
     public static void main(String[] args) throws IOException {
         // 获取输入流
-        FileInputStream fileInputStream = new FileInputStream("D:\\郑朝辉的简历.pdf");
+        FileInputStream fileInputStream = new FileInputStream("D:\\的简历.pdf");
 
         // 获取输出流
         FileOutputStream fileOutputStream = new FileOutputStream("D:\\2.txt");
