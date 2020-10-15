@@ -9,13 +9,13 @@ import java.util.concurrent.atomic.AtomicLong;
  *
  * AtomicLong的简单使用
  * @author ZhengChaoHui
- * @Date 2020/7/8 19:03
+ * @date 2020/7/8 19:03
  *
  */
 public class Atomic {
 
     /**
-     *     新建AtomicLong
+     * 新建AtomicLong
      */
     private static AtomicLong atomicLong = new AtomicLong();
     private static Integer[] arrayOne = new Integer[]{23,0,0,7,82,21,0};
@@ -26,7 +26,7 @@ public class Atomic {
     private static final int QUEUE_CAPACITY = 100;
     private static final Long KEEP_ALIVE_TIME = 1L;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args){
 
         ThreadPoolExecutor executor = new ThreadPoolExecutor(
                 CORE_POOL_SIZE,
