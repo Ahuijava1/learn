@@ -1,5 +1,8 @@
 package com.learn.juc;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -15,40 +18,43 @@ public class Atomic {
      *     新建AtomicLong
      */
     private static AtomicLong atomicLong = new AtomicLong();
-    private static Integer[] arrayOne = new Integer[]{23,22,0,7,82,21,0};
+    private static Integer[] arrayOne = new Integer[]{23,0,0,7,82,21,0};
     private static Integer[] arrayTwo = new Integer[]{12,45,6,2,63,12,0};
 
+    private static final int CORE_POOL_SIZE = 5;
+    private static final int MAX_POOL_SIZE = 10;
+    private static final int QUEUE_CAPACITY = 100;
+    private static final Long KEEP_ALIVE_TIME = 1L;
+
     public static void main(String[] args) throws InterruptedException {
-        //开启线程1
-        Thread thread1 = new Thread(()-> {
-            for (Integer integer : arrayOne) {
-                if (integer == 0) {
 
-                    atomicLong.incrementAndGet();
-//                    atomicLong.getAndIncrement();
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+                CORE_POOL_SIZE,
+                MAX_POOL_SIZE,
+                KEEP_ALIVE_TIME,
+                TimeUnit.SECONDS,
+                new ArrayBlockingQueue<>(QUEUE_CAPACITY),
+                new ThreadPoolExecutor.CallerRunsPolicy());
 
-                }
-            }
-        });
+        executor.submit(getThread(arrayOne));
+        executor.submit(getThread(arrayTwo));
 
-        Thread thread2 = new Thread(()-> {
-            for (Integer integer : arrayTwo) {
-                if (integer == 0) {
-                    atomicLong.incrementAndGet();
+        executor.shutdown();
+        while (!executor.isTerminated()){}
 
-                }
-            }
-        });
-
-        thread1.start();
-        thread2.start();
-
-        //等待完成
-        thread1.join();
-        thread2.join();
 
         //输出
-        System.out.println("Count 0:" + atomicLong.get());
+        System.out.println("The num of 0 is : " + atomicLong.get());
+    }
+
+    private static Runnable getThread(Integer[] arr) {
+        return () -> {
+            for (Integer integer : arr) {
+                if (integer == 0) {
+                    atomicLong.getAndIncrement();
+                }
+            }
+        };
     }
 
 }
