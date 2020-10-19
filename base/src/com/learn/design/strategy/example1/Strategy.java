@@ -1,8 +1,9 @@
-package com.learn.design.strategy;
+package com.learn.design.strategy.example1;
 
 /**
  * Strategy
  * 策略类
+ *
  * @author zhengchaohui
  * @date 2020/10/19 15:19
  */
