@@ -1,4 +1,4 @@
-package com.learn.design.strategy;
+package com.learn.design.strategy.example1;
 
 /**
  * OperationSubtract
