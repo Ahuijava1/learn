@@ -17,9 +17,9 @@ import java.util.concurrent.*;
  * @date 2020/10/15 10:45
  */
 public class ThreadPoolDemo {
-    private static final int CORE_POOL_SIZE = 5;
-    private static final int MAX_POOL_SIZE = 10;
-    private static final int QUEUE_CAPACITY = 100;
+    private static final Integer CORE_POOL_SIZE = 5;
+    private static final Integer MAX_POOL_SIZE = 10;
+    private static final Integer QUEUE_CAPACITY = 100;
     private static final Long KEEP_ALIVE_TIME = 1L;
 
     private static final int THREAD_NUM = 10;
@@ -77,7 +77,7 @@ class MyRunnable implements Runnable{
 
     private String command;
 
-    public MyRunnable(String s) {
+    MyRunnable(String s) {
         this.command = s;
     }
 
@@ -109,7 +109,7 @@ class MyRunnable implements Runnable{
 class MyCallable implements Callable<String> {
 
     @Override
-    public String call() throws Exception {
+    public String call(){
         return "MyCallable:" + Thread.currentThread().getName();
     }
 }
