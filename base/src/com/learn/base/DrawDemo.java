@@ -1,4 +1,4 @@
-package com.learn.java8.stream;
+package com.learn.base;
 
 import javax.swing.*;
 import java.awt.*;
