@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
  * CombinationRateHistoryDemo
  * （暂时针对一个组合策略）
  * 计算近一个月、近三个月、近一年和成立以来的组合收益率
+ * 计算收益波动率
  *
  * @author zhengchaohui
  * @date 2020/11/17 15:52
@@ -66,6 +67,7 @@ public class CombinationRateHistoryDemo {
     }
 
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
         Calendar monthCalendar = Calendar.getInstance();
         monthCalendar.add(Calendar.DATE, -30);
         monthCalendar.set(Calendar.HOUR_OF_DAY, 24);
@@ -84,7 +86,17 @@ public class CombinationRateHistoryDemo {
         yearCalendar.set(Calendar.MINUTE, 0);
         yearCalendar.set(Calendar.SECOND, 0);
 
+        final BigDecimal[] min = {new BigDecimal(Integer.MAX_VALUE)};
+        final BigDecimal[] max = {new BigDecimal(Integer.MIN_VALUE)};
+
         rateDailyRecords.forEach(e -> {
+            if (e.getRate().compareTo(max[0]) > 0) {
+                max[0] = e.getRate();
+            }
+
+            if (e.getRate().compareTo(min[0]) < 0) {
+                min[0] = e.getRate();
+            }
 
             if (e.getDate().getTime() > monthCalendar.getTimeInMillis()) {
                 // 近30天
@@ -117,21 +129,13 @@ public class CombinationRateHistoryDemo {
             days[i] += days[i - 1];
         }
 
-//        rates[1] = rates[1].add(rates[0]);
-//        rates[2] = rates[2].add(rates[1]);
-//        rates[3] = rates[3].add(rates[2]);
-//
-//        tradeFreq[1] = tradeFreq[1].add(tradeFreq[0]);
-//        tradeFreq[2] = tradeFreq[2].add(tradeFreq[1]);
-//        tradeFreq[3] = tradeFreq[3].add(tradeFreq[2]);
-//
-//        days[1] += days[0];
-//        days[2] += days[1];
-//        days[3] += days[2];
-
         for (int i = 0; i < rates.length; i++) {
             System.out.println("收益：" + rates[i] + "%");
             System.out.println("交易频率：" + tradeFreq[i].multiply(BigDecimal.valueOf(100)).divide(BigDecimal.valueOf(days[i]), 2, BigDecimal.ROUND_DOWN) + "%");
+
         }
+        System.out.println("收益波动：" + max[0].subtract(min[0]) + "%");
+
+        System.out.println("time: " + (System.currentTimeMillis() - start) + "ms");
     }
 }
