@@ -55,14 +55,14 @@ public class CombinationRateTodayDemo {
 
 
         // 按股票分组，所有记录，其实还要根据组合策略分组
-        Map<String, List<OrderRecord>> stockGroup = orders.stream().collect(Collectors.groupingBy(OrderRecord::getProductCode));
+//        Map<String, List<OrderRecord>> stockGroup = orders.stream().collect(Collectors.groupingBy(OrderRecord::getProductCode));
 
-        // 该策略每支股票的所有记录
-        stockGroup.forEach((k, v) -> {
-            // 卖出的价值大于买入的价值（不算手续费的情况）
-            // ∑（卖出股数1*卖出成交价1 - 手续费1）- ∑（买入股数2*买入成本价2 + 手续费2）
-
-        });
+//        // 该策略每支股票的所有记录
+//        stockGroup.forEach((k, v) -> {
+//            // 卖出的价值大于买入的价值（不算手续费的情况）
+//            // ∑（卖出股数1*卖出成交价1 - 手续费1）- ∑（买入股数2*买入成本价2 + 手续费2）
+//
+//        });
 
         // 按股票分组（并且只保留今天的数据，向mongo查询的时候，如果只是计算收益率，那么倒是可以只取今天的数据。
         // 可是计算胜率的时候，则必须要把所有数据都拉取。因此，做过滤是有必要的）
@@ -81,7 +81,6 @@ public class CombinationRateTodayDemo {
 
             // 该策略总市值
             // ∑k对应的股票的综合成本价*股数 （数据库）
-
 
         });
 
@@ -140,7 +139,7 @@ public class CombinationRateTodayDemo {
     }
 
     /**
-     * 计算单只股票今日买入卖出成交额
+     * 计算单只股票今日买入卖出成交额（以及更新历史了结股票数和历史了结获利股票数）
      *
      * @return map
      * @param orderRecords
@@ -165,6 +164,7 @@ public class CombinationRateTodayDemo {
             }
 
             // 查看今日是否有调仓为0的
+            // 用于更新历史了结股票数和历史了结获利股票数
             if (orderRecord.getAfterHold().equals(BigDecimal.ZERO)) {
                 // 找离当前位置到最近的新买入的所有数据
                 // 模拟数据
@@ -174,8 +174,7 @@ public class CombinationRateTodayDemo {
                     // 策略历史了结获利+1
                     historyStockProfit++;
                 }
-
-                // 历史了结股票数+1
+                // 历史了结股票数+1（要通过历史了结股票数来计算胜率的）
                 historyStock++;
             }
         }

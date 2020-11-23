@@ -196,6 +196,8 @@ public class RateOfReturnDemo {
         System.out.println("--------------优化2：--------------");
 //        help2();
         // 绘图
-        new DrawDemo().go(rateOfReturn, o, d);
+//        new DrawDemo().go(rateOfReturn, o, d);
+        Map<String, String> map = new HashMap<>(2);
+        System.out.println(map.get(2));
     }
 }
