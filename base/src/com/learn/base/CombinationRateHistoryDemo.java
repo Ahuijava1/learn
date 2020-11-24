@@ -49,7 +49,7 @@ public class CombinationRateHistoryDemo {
         calendar.add(Calendar.DATE, -1);
         rateDailyRecords.add(new RateDailyRecord(new BigDecimal(-10), 0, calendar.getTime()));
         calendar.add(Calendar.DATE, -1);
-        rateDailyRecords.add(new RateDailyRecord(new BigDecimal(-5), 1, calendar.getTime()));
+        rateDailyRecords.add(new RateDailyRecord(new BigDecimal(-5), 7, calendar.getTime()));
         calendar.add(Calendar.DATE, -1);
         rateDailyRecords.add(new RateDailyRecord(new BigDecimal(-10), 0, calendar.getTime()));
         calendar.add(Calendar.DATE, -1);
