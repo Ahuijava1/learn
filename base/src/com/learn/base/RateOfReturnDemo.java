@@ -15,7 +15,7 @@ public class RateOfReturnDemo {
 
     private static List<BigDecimal> rateOfReturn = new ArrayList<>();
     private static Random rand = new Random(new Random().nextLong());
-    private static Integer DATA_SIZE = 250;
+    private static Integer DATA_SIZE = 150;
     private static int o = 0, d = 0;
 
     /**
@@ -23,12 +23,12 @@ public class RateOfReturnDemo {
      */
     private static void init() {
         System.out.println("init......");
-        rand.doubles(DATA_SIZE).limit(DATA_SIZE).forEach(value ->
-                {
-                    // 6位小数，向下取整
-                    BigDecimal rate = new BigDecimal(value).setScale(12, 1);
-                    rateOfReturn.add(rate);
-                });
+//        rand.doubles(DATA_SIZE).limit(DATA_SIZE).forEach(value ->
+//                {
+//                    // 6位小数，向下取整
+//                    BigDecimal rate = new BigDecimal(value).setScale(12, 1);
+//                    rateOfReturn.add(rate);
+//                });
 
 //        rateOfReturn.add(new BigDecimal("0.50"));
 //        rateOfReturn.add(new BigDecimal("0.52"));
@@ -37,9 +37,9 @@ public class RateOfReturnDemo {
 //        rateOfReturn.add(new BigDecimal("0.50"));
 //        rateOfReturn.add(new BigDecimal("0.46"));
 //        rateOfReturn.add(new BigDecimal("0.44"));
-//        rateOfReturn.add(new BigDecimal("-1"));
+        rateOfReturn.add(new BigDecimal("-1"));
 //        rateOfReturn.add(new BigDecimal("0.44"));
-//        rateOfReturn.add(new BigDecimal("-1"));
+        rateOfReturn.add(new BigDecimal("-2"));
 //        rateOfReturn.add(new BigDecimal("0.54"));
 //        rateOfReturn.add(new BigDecimal("0.51"));
 //        rateOfReturn.add(new BigDecimal("0.44"));
@@ -188,11 +188,15 @@ public class RateOfReturnDemo {
      */
     private static void help3() {
         long start = System.currentTimeMillis();
+        // 累加
+        for (int i = 1; i < rateOfReturn.size(); i++) {
+            rateOfReturn.set(i, rateOfReturn.get(i - 1).add( rateOfReturn.get(i)));
+        }
         BigDecimal max = new BigDecimal(Integer.MIN_VALUE);
         BigDecimal min = new BigDecimal(Integer.MAX_VALUE);
-        BigDecimal payback = new BigDecimal(Integer.MIN_VALUE);
-        BigDecimal maxReal = BigDecimal.ZERO;
-        BigDecimal minReal = BigDecimal.ZERO;
+        BigDecimal payback = BigDecimal.ZERO;
+        BigDecimal maxReal = new BigDecimal(Integer.MIN_VALUE);
+        BigDecimal minReal = new BigDecimal(Integer.MAX_VALUE);
         int maxIndex = 0, minIndex = 0;
         int maxRealIndex = 0, minRealIndex = 0;
         int index = 0;
@@ -221,10 +225,15 @@ public class RateOfReturnDemo {
             }
             index++;
         }
-
+        if (maxReal.compareTo(BigDecimal.ZERO) < 0) {
+            System.out.println("最大回撤最大值小于0，要从假起点开始算");
+            maxReal = BigDecimal.ZERO;
+            maxRealIndex = -1;
+            payback = BigDecimal.ZERO.subtract(minReal);
+        }
         System.out.println("最大回测：" + payback);
-        System.out.println("最大值：<pos, value>" + maxRealIndex + ", " + maxReal.toString());
-        System.out.println("最小值：<pos, value>" + minRealIndex + ", " + minReal.toString());
+        System.out.println("最大值：<pos, value> " + maxRealIndex + ", " + maxReal.toString());
+        System.out.println("最小值：<pos, value> " + minRealIndex + ", " + minReal.toString());
 
         long end = System.currentTimeMillis();
         System.out.println((end - start) + "ms");
@@ -237,7 +246,7 @@ public class RateOfReturnDemo {
         init();
         System.out.println("数据初始化完成....");
 //        System.out.println("-------------暴力算法：-------------");
-//        violence();
+        violence();
         // 优化1
         System.out.println("--------------优化1：--------------");
 //        help();
@@ -248,6 +257,10 @@ public class RateOfReturnDemo {
         System.out.println("--------------优化2：--------------");
         help3();
 //        new DrawDemo().go(rateOfReturn, o, d);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_WEEK, -1);
+        System.out.println(calendar.getTime());
 
     }
 }
