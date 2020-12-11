@@ -2,6 +2,7 @@
 <project version="4">
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/../gupaoedu-vip-spring-1.0" />
+    <file type="web" url="file://$PROJECT_DIR$/spider" />
     <file type="web" url="file://$PROJECT_DIR$/spring-mvc-learn/spring-mvc-01" />
     <file type="web" url="file://$PROJECT_DIR$/spring-mvc-learn/spring-mvc-learn-01" />
   </component>
@@ -13,6 +14,7 @@
       <list>
         <option value="$PROJECT_DIR$/spring-mvc-learn/pom.xml" />
         <option value="$PROJECT_DIR$/../gupaoedu-vip-spring-1.0/pom.xml" />
+        <option value="$PROJECT_DIR$/spider/pom.xml" />
       </list>
     </option>
   </component>
