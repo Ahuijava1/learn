@@ -3,6 +3,7 @@ package com.spider.webmagic;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
+import us.codecraft.webmagic.pipeline.FilePipeline;
 import us.codecraft.webmagic.pipeline.JsonFilePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
@@ -13,6 +14,7 @@ import java.util.List;
  * WebMagicProcessor
  * https://www.chinadaily.com.cn
  * http://www.chinadailyglobal.com/
+ *
  * @author zhengchaohui
  * @date 2020/12/11 16:11
  */
@@ -34,13 +36,15 @@ public class WebMagicProcessor implements PageProcessor {
         Spider.create(new WebMagicProcessor())
                 .addUrl("https://www.chinadaily.com.cn/china/governmentandpolicy/")
                 .addPipeline(new JsonFilePipeline("D:\\temp\\"))
+                .addPipeline(new FilePipeline("D:\\temp\\"))
                 .thread(5).run();
         endTime = System.currentTimeMillis();
-        System.out.println("爬取结束，耗时约" + ((endTime - startTime) / 1000) + "秒，抓取了"+count+"条记录");
+        System.out.println("爬取结束，耗时约" + ((endTime - startTime) / 1000) + "秒，抓取了" + count + "条记录");
     }
 
     /**
      * 获取站点page，并进行匹配
+     *
      * @param page
      */
     public void process(Page page) {
@@ -55,7 +59,7 @@ public class WebMagicProcessor implements PageProcessor {
         page.putField("图片", pics);
         List<String> contents = html.xpath("//div[@id=\"content\"]/p/text()").all();
         page.putField("内容", contents);
-        count ++;
+        count++;
     }
 
     public Site getSite() {
