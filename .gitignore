@@ -7,6 +7,6 @@
 /bin/
 *.iml
 /base/out
+/.idea/
 /spider/target/
 /spring-mvc-learn/spring-mvc-01/target/
-/.idea/
