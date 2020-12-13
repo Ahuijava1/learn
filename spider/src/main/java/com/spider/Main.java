@@ -1,27 +1,27 @@
 package com.spider;
 
 import com.alibaba.fastjson.JSON;
-import com.spider.model.Movie;
-import com.spider.utils.GetJson;
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import com.spider.model.Movie;
+import com.spider.utils.GetJson;
 
 import java.util.List;
 
 /**
- * Main
- *
- * @author zhengchaohui
- * @date 2020/12/11 14:57
+ * @author ZhengChaoHui
+ * @Date 2020/12/11 22:56
  */
+@Slf4j
 public class Main {
-    public static  void  main(String [] args) {
+    public static void main(String[] args) {
 
 
         int start;//每页多少条
         int total = 0;//记录数
         int end = 9979;//总共9979条数据
-        for (start  = 0; start <= 40; start += 20)  {
+        for (start = 0; start <= 40; start += 20) {
             try {
 
                 String address = "https://Movie.douban.com/j/new_search_subjects?sort=U&range=0,10&tags=&start=" + start;
@@ -32,7 +32,7 @@ public class Main {
                 JSONArray json = dayLine.getJSONArray("data");
                 List<Movie> list = JSON.parseArray(json.toString(), Movie.class);
 
-                if (start <= end){
+                if (start <= end) {
                     System.out.println("已经爬取到底了");
                 }
                 for (Movie movie : list) {
@@ -47,5 +47,4 @@ public class Main {
 
         }
     }
-
 }

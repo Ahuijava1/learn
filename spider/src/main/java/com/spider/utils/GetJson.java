@@ -1,6 +1,7 @@
 package com.spider.utils;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
@@ -16,6 +17,7 @@ import java.net.URL;
  * @author zhengchaohui
  * @date 2020/12/11 14:56
  */
+@Slf4j
 public class GetJson {
     public JSONObject getHttpJson(String url, int comefrom) throws Exception {
         try {

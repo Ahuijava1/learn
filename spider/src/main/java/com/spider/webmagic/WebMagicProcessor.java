@@ -1,5 +1,6 @@
 package com.spider.webmagic;
 
+import lombok.extern.slf4j.Slf4j;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -18,6 +19,7 @@ import java.util.List;
  * @author zhengchaohui
  * @date 2020/12/11 16:11
  */
+@Slf4j
 public class WebMagicProcessor implements PageProcessor {
     /**
      * 抓取网站的相关配置，包括编码、抓取间隔、重试次数等
