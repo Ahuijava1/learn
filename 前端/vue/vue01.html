@@ -3,12 +3,36 @@
 <head>
 	<meta charset="UTF-8">
 	<title>vue01</title>
+	<!-- import CSS -->
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- import JavaScript -->
+	<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <style>
+        span{
+            padding: 4px;
+        }
+
+		.colorShow{
+			background-color: red;
+			cursor: pointer;
+		}
+    </style>
 </head>
 <body>
 
 
-	<div id="app">{{message}}</div>
+<div id="app-e">
+	<el-button @click="visible = true">Button</el-button>
+	<el-dialog :visible.sync="visible" title="Hello world">
+		<p>Try Element</p>
+	</el-dialog>
+</div>
+
+	<div id="app" >
+        <span v-for=" data, i in message" :class="{colorShow:activeSpan == data}" @click="wordClick" @mouseenter="mouseEnter(data)" @mouseout="mouseout">{{data}}</span>
+        <!--<div v-html="message"></div>-->
+    </div>
 	<div id="app2">
 		<span :title='message'> 鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
 	</div>
@@ -30,12 +54,43 @@
 </html>
 
 <script>
+
+    new Vue({
+        el: '#app-e',
+        data: function() {
+            return { visible: false }
+        }
+    })
+
+</script>
+
+<script>
+    let content = "At that' point, leav-e_——s begin to change。 color. <br>从那时起，树叶就开始变色。".split("<br>");
+    // let en = content[0].replace(/([A-z]+)/gi,'<span>$1</span>');
+    let en = [];
+    let e = content[0].trim().replace(/([A-z]+)/gi, '<span @click=\"wordClick\">$1</span>');
+    en = content[0].trim().split(" ");
 	var app = new Vue({
 		el: "#app",
 		data:{
-			message : 'HELLO VUE!'
-		}
-	})
+			message : en,
+            activeSpan : ''
+		},
+        methods: {
+            wordClick : function (event) {
+                let a = event.target.innerText.replace(/([A-z]+)/gi, '<span>$1<span>')
+                alert(a)
+            },
+            mouseEnter : function (event) {
+                console.log(event.replace(/[\.。，,;；、\-\_——]*/gi, ''));
+				this.activeSpan = event;
+            },
+			mouseout : function () {
+                this.activeSpan = '';
+            }
+        }
+
+	});
 
 	var app2 = new Vue({
 		el: "#app2",
