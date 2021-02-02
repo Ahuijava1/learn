@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
       <module fileurl="file://$PROJECT_DIR$/../gupaoedu-vip-spring-1.0/gupaoedu-vip-spring.iml" filepath="$PROJECT_DIR$/../gupaoedu-vip-spring-1.0/gupaoedu-vip-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-mvc-learn/gupaoedu-vip-spring-1.0.iml" filepath="$PROJECT_DIR$/spring-mvc-learn/gupaoedu-vip-spring-1.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/spring-mvc-learn/gupaoeduvipspring10.iml" filepath="$PROJECT_DIR$/spring-mvc-learn/gupaoeduvipspring10.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/learn.iml" filepath="$PROJECT_DIR$/.idea/learn.iml" />
       <module fileurl="file://$PROJECT_DIR$/spider/spider.iml" filepath="$PROJECT_DIR$/spider/spider.iml" />

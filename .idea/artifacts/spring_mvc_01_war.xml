@@ -1,6 +1,12 @@
 <component name="ArtifactManager">
   <artifact type="war" name="spring-mvc-01:war">
     <output-path>$PROJECT_DIR$/spring-mvc-learn/spring-mvc-01/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>spring-mvc-01</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="archive" name="spring-mvc-01.war">
       <element id="artifact" artifact-name="spring-mvc-01:war exploded" />
     </root>
